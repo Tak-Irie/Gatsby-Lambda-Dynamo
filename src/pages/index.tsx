@@ -1,10 +1,12 @@
 import * as React from "react"
-import type { HeadFC, PageProps } from "gatsby"
+import { Link } from "gatsby"
+import type { HeadFC, PageProps} from "gatsby"
 
 const IndexPage: React.FC<PageProps> = () => {
   return (
     <main>
       <h1>initial</h1>
+      <Link to="/about">About</Link>
     </main>
   )
 }
