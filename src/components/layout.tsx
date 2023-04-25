@@ -49,6 +49,9 @@ export const Layout: React.FC<LayoutProps> = ({ pageTitle, children }) => {
 					<li css={li}>
 						<Link to="/about">About</Link>
 					</li>
+					<li css={li}>
+						<Link to="/blog">Blog</Link>
+					</li>
 				</ul>
 			</nav>
 			<main>
