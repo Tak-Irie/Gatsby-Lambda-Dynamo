@@ -1,17 +1,41 @@
 import * as React from "react";
-import type { PageProps } from "gatsby";
+import type { PageProps, HeadProps } from "gatsby";
+import { graphql } from "gatsby";
 
 import { Layout } from "../../components/layout";
 import { Seo } from "../../components/seo";
 
-const BlogPost: React.FC<PageProps> = () => {
+type BlogPostProps = {
+	mdx: {
+		frontmatter: {
+			title: string;
+			date: string;
+		};
+	};
+};
+
+const BlogPost: React.FC<PageProps<BlogPostProps>> = ({ data, children }) => {
 	return (
-		<Layout pageTitle="Super Cool Blog Posts">
-			<p>My blog post contents will go here (eventually).</p>
+		<Layout pageTitle={data.mdx.frontmatter.title}>
+			<p>{data.mdx.frontmatter.date}</p>
+			{children}
 		</Layout>
 	);
 };
 
-export const Head = () => <Seo title="Super Cool Blog Posts" />;
+export const query = graphql`
+	query ($id: String) {
+		mdx(id: { eq: $id }) {
+			frontmatter {
+				title
+				date(formatString: "MMMM D, YYYY")
+			}
+		}
+	}
+`;
+
+export const Head = (props: HeadProps<BlogPostProps>) => (
+	<Seo title={props.data.mdx.frontmatter.title} />
+);
 
 export default BlogPost;
