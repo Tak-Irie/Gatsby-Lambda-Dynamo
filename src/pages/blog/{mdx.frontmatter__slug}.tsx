@@ -1,5 +1,5 @@
 import * as React from "react";
-import type { PageProps, HeadProps } from "gatsby";
+import { PageProps, HeadProps, Link } from "gatsby";
 import { graphql } from "gatsby";
 
 import { Layout } from "../../components/layout";
@@ -19,6 +19,7 @@ const BlogPost: React.FC<PageProps<BlogPostProps>> = ({ data, children }) => {
 		<Layout pageTitle={data.mdx.frontmatter.title}>
 			<p>{data.mdx.frontmatter.date}</p>
 			{children}
+			<Link to={`/blog/`}>Back</Link>
 		</Layout>
 	);
 };
