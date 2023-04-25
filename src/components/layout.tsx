@@ -13,10 +13,11 @@ const nav = css({
 
 const ul = css({
 	display: "flex",
+	listStyle: "none",
 });
 
 const li = css({
-	margin: 2,
+	margin: 10,
 });
 
 export const Layout: React.FC<LayoutProps> = ({ pageTitle, children }) => {
