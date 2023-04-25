@@ -1,16 +1,15 @@
-import * as React from "react"
-import type { HeadFC, PageProps } from "gatsby"
-import { Link } from "gatsby"
+import * as React from "react";
+import type { HeadFC, PageProps } from "gatsby";
+import { Layout } from "../components/layout";
 
 const AboutPage: React.FC<PageProps> = () => {
-  return (
-    <main>
-      <h1>hey, it's about</h1>
-      <Link to="/">Back to Home</Link>
-    </main>
-  )
-}
+	return (
+		<Layout pageTitle="About Page">
+			<p>hey, it's about.</p>
+		</Layout>
+	);
+};
 
-export default AboutPage
+export default AboutPage;
 
-export const Head: HeadFC = () => <title>About Page</title>
+export const Head: HeadFC = () => <title>About Page</title>;
