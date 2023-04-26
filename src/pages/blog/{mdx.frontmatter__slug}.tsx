@@ -12,6 +12,8 @@ type BlogPostProps = {
 			date: string;
 			hero_image: ImageDataLike | null;
 			hero_image_alt: string;
+			hero_image_credit_link: string;
+			hero_image_credit_text: string;
 		};
 	};
 };
@@ -22,6 +24,12 @@ const BlogPost: React.FC<PageProps<BlogPostProps>> = ({ data, children }) => {
 		<Layout pageTitle={data.mdx.frontmatter.title}>
 			<p>Posted: {data.mdx.frontmatter.date}</p>
 			<GatsbyImage image={image!} alt={data.mdx.frontmatter.hero_image_alt} />
+			<p>
+				Photo Credit:{" "}
+				<a href={data.mdx.frontmatter.hero_image_credit_link}>
+					{data.mdx.frontmatter.hero_image_credit_text}
+				</a>
+			</p>
 			{children}
 			<Link to={`/blog/`}>Back</Link>
 		</Layout>
