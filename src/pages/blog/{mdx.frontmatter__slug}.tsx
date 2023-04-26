@@ -1,6 +1,6 @@
 import * as React from "react";
-import { PageProps, HeadProps, Link } from "gatsby";
-import { graphql } from "gatsby";
+import { PageProps, HeadProps, Link, graphql } from "gatsby";
+import { GatsbyImage, ImageDataLike, getImage } from "gatsby-plugin-image";
 
 import { Layout } from "../../components/layout";
 import { Seo } from "../../components/seo";
@@ -10,14 +10,18 @@ type BlogPostProps = {
 		frontmatter: {
 			title: string;
 			date: string;
+			hero_image: ImageDataLike | null;
+			hero_image_alt: string;
 		};
 	};
 };
 
 const BlogPost: React.FC<PageProps<BlogPostProps>> = ({ data, children }) => {
+	const image = getImage(data.mdx.frontmatter.hero_image);
 	return (
 		<Layout pageTitle={data.mdx.frontmatter.title}>
-			<p>{data.mdx.frontmatter.date}</p>
+			<p>Posted: {data.mdx.frontmatter.date}</p>
+			<GatsbyImage image={image!} alt={data.mdx.frontmatter.hero_image_alt} />
 			{children}
 			<Link to={`/blog/`}>Back</Link>
 		</Layout>
@@ -29,7 +33,15 @@ export const query = graphql`
 		mdx(id: { eq: $id }) {
 			frontmatter {
 				title
-				date(formatString: "MMMM D, YYYY")
+				date(formatString: "MMMM DD, YYYY")
+				hero_image_alt
+				hero_image_credit_link
+				hero_image_credit_text
+				hero_image {
+					childImageSharp {
+						gatsbyImageData
+					}
+				}
 			}
 		}
 	}
