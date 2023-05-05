@@ -50,7 +50,10 @@ export const Layout: React.FC<LayoutProps> = ({ pageTitle, children }) => {
 						<Link to="/about">About</Link>
 					</li>
 					<li css={li}>
-						<Link to="/blog">Blog</Link>
+						<Link to="/article">Article</Link>
+					</li>
+					<li css={li}>
+						<Link to="/blogs">Blogs</Link>
 					</li>
 				</ul>
 			</nav>
