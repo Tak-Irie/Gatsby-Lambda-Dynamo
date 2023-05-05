@@ -18,13 +18,13 @@ type Data = {
 		];
 	};
 };
-const BlogPage: React.FC<PageProps<Data>> = ({ data }) => {
+const Article: React.FC<PageProps<Data>> = ({ data }) => {
 	return (
-		<Layout pageTitle="My Blog Posts">
+		<Layout pageTitle="My Article Posts">
 			{data.allMdx.nodes.map((node) => (
 				<article key={node.id}>
 					<h2>
-						<Link to={`/blog/${node.frontmatter.slug}`}>
+						<Link to={`/article/${node.frontmatter.slug}`}>
 							{node.frontmatter.title}
 						</Link>
 					</h2>
@@ -52,4 +52,4 @@ export const query = graphql`
 
 export const Head = () => <Seo title="My Blog Posts" />;
 
-export default BlogPage;
+export default Article;

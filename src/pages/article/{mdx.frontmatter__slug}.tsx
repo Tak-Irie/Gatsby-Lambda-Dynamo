@@ -5,7 +5,7 @@ import { GatsbyImage, ImageDataLike, getImage } from "gatsby-plugin-image";
 import { Layout } from "../../components/layout";
 import { Seo } from "../../components/seo";
 
-type BlogPostProps = {
+type ArticlePostProps = {
 	mdx: {
 		frontmatter: {
 			title: string;
@@ -18,7 +18,10 @@ type BlogPostProps = {
 	};
 };
 
-const BlogPost: React.FC<PageProps<BlogPostProps>> = ({ data, children }) => {
+const ArticlePost: React.FC<PageProps<ArticlePostProps>> = ({
+	data,
+	children,
+}) => {
 	const image = getImage(data.mdx.frontmatter.hero_image);
 	return (
 		<Layout pageTitle={data.mdx.frontmatter.title}>
@@ -55,8 +58,8 @@ export const query = graphql`
 	}
 `;
 
-export const Head = (props: HeadProps<BlogPostProps>) => (
+export const Head = (props: HeadProps<ArticlePostProps>) => (
 	<Seo title={props.data.mdx.frontmatter.title} />
 );
 
-export default BlogPost;
+export default ArticlePost;

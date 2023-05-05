@@ -14,11 +14,11 @@ export default function IndexPage({ data }: PageProps<Queries.IndexPageQuery>) {
 			<ul>
 				{allMicrocmsBlogs.nodes.map((node) => (
 					<li key={node.blogsId}>
-						<Link to={`/blog/${node.blogsId}/`}>{node.title}</Link>
+						<Link to={`/blogs/${node.blogsId}/`}>{node.title}</Link>
 					</li>
 				))}
 			</ul>
-			<Link to="/blog/">もっとみる</Link>
+			<Link to="/blogs/">もっとみる</Link>
 			<p>------microCMS above------</p>
 			<StaticImage
 				alt="Clifford, a reddish-brown pitbull, posing on a couch and looking stoically at the camera"
@@ -32,7 +32,7 @@ export const Head: HeadFC = () => <Seo title="Home Page" />;
 
 export const query = graphql`
 	query IndexPage {
-		allMicrocmsBlogs {
+		allMicrocmsBlogs(sort: { publishedAt: DESC }) {
 			nodes {
 				title
 				blogsId

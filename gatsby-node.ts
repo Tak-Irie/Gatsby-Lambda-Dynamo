@@ -1,5 +1,6 @@
 import { Actions, GatsbyNode, graphql } from "gatsby";
 import path from "path";
+import { getPagesContext } from "./src/utils/getPageContext";
 
 export const createPages: GatsbyNode["createPages"] = async ({
 	graphql,
@@ -22,6 +23,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
 						title
 					}
 				}
+				totalCount
 			}
 		}
 	`);
@@ -34,15 +36,43 @@ export const createPages: GatsbyNode["createPages"] = async ({
 		return;
 	}
 
-	result.data?.allMicrocmsBlogs.edges.forEach((edge) => {
+	const {
+		allMicrocmsBlogs: { totalCount, edges },
+	} = result.data!;
+
+	edges.forEach((edge) => {
 		createPage({
-			path: `/blog/${edge.node.blogsId}/`,
+			path: `/blogs/${edge.node.blogsId}/`,
 			component: path.resolve("src/templates/blog.tsx"),
 			context: {
 				id: edge.node.blogsId,
 				next: edge.next,
 				previous: edge.previous,
 			},
+		});
+	});
+
+	const pagesContext = getPagesContext({
+		totalCount,
+		limit: 10, // 1ページあたり10コンテンツを表示させる
+	});
+
+	pagesContext.forEach((context) => {
+		const component = path.resolve("src/templates/blogs.tsx");
+
+		if (context.currentPageNum === 1) {
+			createPage({
+				path: `/blogs/`,
+				component,
+				context,
+			});
+			return;
+		}
+
+		createPage({
+			path: `/blogs/page/${context.currentPageNum}/`,
+			component,
+			context,
 		});
 	});
 };
@@ -63,6 +93,7 @@ export const query = graphql`
 					title
 				}
 			}
+			totalCount
 		}
 	}
 `;

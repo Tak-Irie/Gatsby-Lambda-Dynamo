@@ -17,8 +17,8 @@ const config: GatsbyConfig = {
 		{
 			resolve: "gatsby-source-filesystem",
 			options: {
-				name: `blog`,
-				path: `${__dirname}/blog`,
+				name: `article`,
+				path: `${__dirname}/article`,
 			},
 		},
 		"gatsby-plugin-mdx",
