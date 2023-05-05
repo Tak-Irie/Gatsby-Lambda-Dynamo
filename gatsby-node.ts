@@ -76,24 +76,3 @@ export const createPages: GatsbyNode["createPages"] = async ({
 		});
 	});
 };
-
-export const query = graphql`
-	query CreatePages {
-		allMicrocmsBlogs(sort: { publishedAt: DESC }) {
-			edges {
-				node {
-					blogsId
-				}
-				next {
-					blogsId
-					title
-				}
-				previous {
-					blogsId
-					title
-				}
-			}
-			totalCount
-		}
-	}
-`;
